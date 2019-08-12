@@ -1,0 +1,9 @@
+name: tesseract-ocr
+version: 0.1.0
+
+authors:
+  - Danilo Jeremias da Silva <daniloj.dasilva@gmail.com>
+
+crystal: 0.30.0
+
+license: MIT
