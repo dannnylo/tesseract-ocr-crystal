@@ -9,7 +9,7 @@ This package is a wrapper of Tesseract OCR. Helping to read characters on a imag
    ```yaml
    dependencies:
      tesseract-ocr:
-       github: dannnylo/tesseract-ocr
+       github: dannnylo/tesseract-ocr-crystal
    ```
 
 2. Run `shards install`
@@ -25,11 +25,11 @@ Basic usage:
 
 With options:
 
-```Tesseract::Ocr.read("spec/resources/world.png", {  l: "por", oem: "1" }) => "world"``
+```Tesseract::Ocr.read("spec/resources/world.png", {  l: "por", oem: "1" }) => "world"```
 
 ## Contributing
 
-1. Fork it (<https://github.com/your-github-user/tesseract-ocr/fork>)
+1. Fork it (<https://github.com/dannnylo/tesseract-ocr-crystal/fork>)
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
