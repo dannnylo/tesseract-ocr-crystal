@@ -19,13 +19,18 @@ This package is a wrapper of Tesseract OCR. Helping to read characters on a imag
 ```crystal
 require "tesseract-ocr"
 ```
+
 Basic usage:
 
 ```Tesseract::Ocr.read("spec/resources/world.png") => "world"```
 
 With options:
 
-```Tesseract::Ocr.read("spec/resources/world.png", {  l: "por", oem: "1" }) => "world"```
+```Tesseract::Ocr.read("spec/resources/world.png", {  :l => "por", :oem => "1" }) => "world"```
+
+Convert image to PDF readable.
+
+```Tesseract::Ocr.to_pdf("spec/resources/world.png", { :oem => "1" }) => "/tmp/RANDOM_NAME.pdf"```
 
 ## Contributing
 
