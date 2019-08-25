@@ -15,16 +15,21 @@ module Tesseract::Ocr
     Tesseract::Ocr::Command.new(path, "stdout", options).run
   end
 
-  # def to_s(path, options = OPTIONS)
-  #   Tesseract::Ocr::Command.new(path, "stdout", options : Hash(String | Symbol, String | Int32 | Nil)).run
-  # end
+  # This function reads the chars on image by OCR and saves on a pdf file.
+  # and returning the path.
+  #
+  # ```
+  # Tesseract::Ocr.to_pdf("spec/resources/world.png") => "/tmp/random_file.pdf"
+  # ```
+  def to_pdf(path, options = Hash(Symbol, String | Int32).new)
+    merged = Hash(Symbol, String | Int32 | Nil).new
+    merged[:tessedit_create_pdf] = 1
+    merged.merge!(options)
 
-  # # alias to_s read
+    filename = File.tempname(".pdf")
 
-  # def to_pdf(source, options = OPTIONS)
-  #   options[:tessedit_create_pdf] = 1
-  #   Tesseract::Ocr::Command.new(source, "/tmp/teste.txt", options).run
+    Tesseract::Ocr::Command.new(path, filename, options).run
 
-  #   # File.open(temp_file('.pdf'), 'r')
-  # end
+    return filename
+  end
 end
