@@ -21,15 +21,16 @@ module Tesseract::Ocr
   # ```
   # Tesseract::Ocr.to_pdf("spec/resources/world.png") => "/tmp/random_file.pdf"
   # ```
-  def to_pdf(path, options = Hash(Symbol, String | Int32).new)
-    merged = Hash(Symbol, String | Int32 | Nil).new
-    merged[:tessedit_create_pdf] = 1
+  def to_pdf(path, options = Hash(Symbol, String | Int32 | Array(String)).new)
+    merged = Hash(Symbol, String | Int32 | Nil | Array(String)).new
     merged.merge!(options)
 
-    filename = File.tempname(".pdf")
+    merged[:c] = ["tessedit_create_pdf=1", options[:c]?].flatten.compact
 
-    Tesseract::Ocr::Command.new(path, filename, options).run
+    filename = File.tempname
 
-    return filename
+    Tesseract::Ocr::Command.new(path, filename, merged).run
+
+    return "#{filename}.pdf"
   end
 end

@@ -13,15 +13,17 @@ describe Tesseract::Ocr do
   it "read a to_pdf" do
     pdf_path = Tesseract::Ocr.to_pdf(
       "./spec/resources/blank.tif",
-      {} of Symbol => String
+      {
+        :c => ["poly_debug=0"],
+      }
     )
 
     pdf_path.should contain(".pdf")
     File.exists?(pdf_path)
 
     other_pdf_path = Tesseract::Ocr.to_pdf(
-      "./spec/resources/blank.tif",
-      {} of Symbol => Int32
+      "./spec/resources/world.png",
+      {} of Symbol => String
     )
     other_pdf_path.should contain(".pdf")
 
