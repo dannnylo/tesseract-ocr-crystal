@@ -23,7 +23,7 @@ describe Tesseract::Ocr::Command do
     command = Tesseract::Ocr::Command.new("./spec/resources/blank.tif", "stdout", {
       :config_path => "/tmp/config_path.txt",
       :l           => "eng",
-      :c           => [
+      :config      => [
         "a=1",
         "b=2",
       ],

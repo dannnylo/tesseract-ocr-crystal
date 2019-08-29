@@ -30,7 +30,7 @@ class Tesseract::Ocr::Command
           make_option("tessdata-dir", @options[:"tessdata-dir"]? || @options[:tessdata_dir]?),
           make_option("user-words", @options[:"user-words"]? || @options[:user_words]?),
           make_option("user-patterns", @options[:"user-patterns"]? || @options[:user_patterns]?),
-          make_short_option(:c, @options[:c]?),
+          make_short_option(:c, @options[:config]?),
           @options[:config_path]?,
         ]
     ).flatten.compact.join(' ')
