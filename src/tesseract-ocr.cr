@@ -4,7 +4,7 @@ require "./command"
 module Tesseract::Ocr
   extend self
 
-  VERSION = "0.1.0"
+  VERSION = "0.1.1"
 
   # This function reads the chars on image by OCR
   #
@@ -30,8 +30,6 @@ module Tesseract::Ocr
     command.add_options(options)
     command.add_config("tessedit_create_pdf=1")
     command.run
-    # merged = normalize_and_add_config(options, "tessedit_create_pdf=1")
-    # Tesseract::Ocr::Command.new(path, filename, merged).run
 
     return "#{filename}.pdf"
   end
@@ -52,15 +50,4 @@ module Tesseract::Ocr
 
     return "#{filename}.tsv"
   end
-
-  # def normalize_and_add_config(options, option : String)
-  #   merged = Hash(Symbol, String | Nil | Array(String)).new
-  #   merged.merge!(options)
-
-  #   merged[:config] = [merged[:c]?, option].flatten.compact
-
-  #   merged.delete(:c)
-
-  #   merged
-  # end
 end
