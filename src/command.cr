@@ -4,15 +4,19 @@ class Tesseract::Ocr::Command
     @output = output
 
     @options = Hash(Symbol | String, String | Int32 | Nil | Array(String)).new
-    @options[:config] = [] of String
+    @config = [] of String
   end
 
   def add_options(options)
     @options.merge!(options)
+
+    [options[:config]?, options[:c]?].flatten.each do |config|
+      @config.push("#{config}") if config
+    end
   end
 
   def add_config(config)
-    @options[:config] = config
+    @config.push(config)
   end
 
   def run
@@ -38,7 +42,7 @@ class Tesseract::Ocr::Command
         make_option("tessdata-dir", @options[:"tessdata-dir"]? || @options[:tessdata_dir]?),
         make_option("user-words", @options[:"user-words"]? || @options[:user_words]?),
         make_option("user-patterns", @options[:"user-patterns"]? || @options[:user_patterns]?),
-        make_short_option(:c, @options[:config]?),
+        make_short_option(:c, @config),
         @options[:config_path]?,
       ]
     ).flatten.compact.join(' ')

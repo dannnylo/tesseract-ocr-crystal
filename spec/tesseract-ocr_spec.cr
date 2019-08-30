@@ -8,6 +8,7 @@ describe Tesseract::Ocr do
     Tesseract::Ocr.read("./spec/resources/world.png", {:lang => "eng", :psm => 7, :oem => 1}).should eq("world")
     Tesseract::Ocr.read("./spec/resources/world.png", {:lang => "eng"}).should eq("world")
     Tesseract::Ocr.read("./spec/resources/world.png", {:oem => 3}).should eq("world")
+    Tesseract::Ocr.read("./spec/resources/world.png", {:oem => 3, :c => "poly_debug=0"}).should eq("world")
   end
 
   it "convert a image to pdf" do
