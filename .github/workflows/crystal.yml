@@ -15,10 +15,10 @@ jobs:
     - name: Install tesseract
       run: |
         apt-get update
-        apt-get install software-properties-common
+        apt-get install software-properties-common -y
         add-apt-repository ppa:alex-p/tesseract-ocr -y
         apt-get update
-        apt-get install tesseract-ocr tesseract-ocr-eng ghostscript -y
+        apt-get install -y tesseract-ocr tesseract-ocr-eng ghostscript
     - name: Install dependencies
       run: shards install
     - name: Run tests
