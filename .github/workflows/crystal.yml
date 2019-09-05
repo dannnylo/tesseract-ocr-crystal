@@ -5,7 +5,7 @@ on: [push]
 jobs:
   build:
 
-    runs-on: ubuntu-19.04
+    runs-on: ubuntu-latest
     
     container:
       image: crystallang/crystal
@@ -14,7 +14,9 @@ jobs:
     - uses: actions/checkout@v1
     - name: Install tesseract
       run: |
-        apt-get update
+        apt-get install software-properties-common
+        add-apt-repository ppa:alex-p/tesseract-ocr -y
+        apt-get update        
         apt-get install tesseract-ocr tesseract-ocr-eng ghostscript -y
     - name: Install dependencies
       run: shards install
