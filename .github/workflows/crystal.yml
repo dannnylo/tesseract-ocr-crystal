@@ -1,0 +1,23 @@
+name: Crystal CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    
+    container:
+      image: crystallang/crystal
+    
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install tesseract
+      run: |
+        add-apt-repository ppa:alex-p/tesseract-ocr -y
+        apt-get update -q
+        apt-get install tesseract-ocr tesseract-ocr-eng ghostscript -y
+    - name: Install dependencies
+      run: shards install
+    - name: Run tests
+      run: crystal spec
