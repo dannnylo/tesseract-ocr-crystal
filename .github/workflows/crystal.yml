@@ -14,8 +14,6 @@ jobs:
     - uses: actions/checkout@v1
     - name: Install tesseract
       run: |
-        add-apt-repository ppa:alex-p/tesseract-ocr -y
-        apt-get update -q
         apt-get install tesseract-ocr tesseract-ocr-eng ghostscript -y
     - name: Install dependencies
       run: shards install
