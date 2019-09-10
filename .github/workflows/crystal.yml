@@ -6,19 +6,12 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    
+
     container:
-      image: crystallang/crystal
-    
+      image: dannnylo/crystal_with_tesseract:latest
+
     steps:
     - uses: actions/checkout@v1
-    - name: Install tesseract
-      run: |
-        apt-get update
-        apt-get install software-properties-common -y
-        add-apt-repository ppa:alex-p/tesseract-ocr -y
-        apt-get update
-        apt-get install -y tesseract-ocr tesseract-ocr-eng ghostscript
     - name: Install dependencies
       run: shards install
     - name: Run tests
