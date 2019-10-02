@@ -1,12 +1,22 @@
 class Tesseract::Ocr::Command
-  def initialize(source : String, output : String, options = {} of Symbol => String)
-    @start_command = [
-      "#{options[:command]? || "tesseract"}",
-      source,
-      output,
-    ]
+  def initialize(source : String, output : String)
+    @source = source
+    @output = output
+
     @options = Hash(Symbol | String, String | Int32 | Nil | Array(String)).new
+    @config = [] of String
+  end
+
+  def add_options(options)
     @options.merge!(options)
+
+    [options[:config]?, options[:c]?].flatten.each do |config|
+      @config.push("#{config}") if config
+    end
+  end
+
+  def add_config(config)
+    @config.push(config)
   end
 
   def run
@@ -22,17 +32,19 @@ class Tesseract::Ocr::Command
   # ```
   def command
     (
-      @start_command +
-        [
-          make_short_option(:l, @options[:l]? || @options[:lang]?),
-          make_option(:oem, @options[:oem]?),
-          make_option(:psm, @options[:psm]?),
-          make_option("tessdata-dir", @options[:"tessdata-dir"]? || @options[:tessdata_dir]?),
-          make_option("user-words", @options[:"user-words"]? || @options[:user_words]?),
-          make_option("user-patterns", @options[:"user-patterns"]? || @options[:user_patterns]?),
-          make_short_option(:c, @options[:c]?),
-          @options[:config_path]?,
-        ]
+      [
+        "#{@options[:command]? || "tesseract"}",
+        @source,
+        @output,
+        make_short_option(:l, @options[:l]? || @options[:lang]?),
+        make_option(:oem, @options[:oem]?),
+        make_option(:psm, @options[:psm]?),
+        make_option("tessdata-dir", @options[:"tessdata-dir"]? || @options[:tessdata_dir]?),
+        make_option("user-words", @options[:"user-words"]? || @options[:user_words]?),
+        make_option("user-patterns", @options[:"user-patterns"]? || @options[:user_patterns]?),
+        make_short_option(:c, @config),
+        @options[:config_path]?,
+      ]
     ).flatten.compact.join(' ')
   end
 
