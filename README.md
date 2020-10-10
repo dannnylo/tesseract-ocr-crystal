@@ -40,6 +40,11 @@ Convert image to PDF readable.
 Tesseract::Ocr.to_pdf("spec/resources/world.png", { :oem => "1" }) => "/tmp/RANDOM_NAME.pdf"
 ```
 
+Reading the image and get words positions
+
+```crystal
+Tesseract::OcrWords.read("spec/resources/world.png") => [{word: "world", confidence: 95, x_start: 2, y_start: 2, x_end: 185, y_end: 56}]
+```
 
 ## Contributing
 

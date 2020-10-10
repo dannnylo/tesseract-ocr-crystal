@@ -1,10 +1,11 @@
 require "./command"
+require "./tesseract-ocr-words"
 
 # This Module is a wrapper of tesseract-ocr
 module Tesseract::Ocr
   extend self
 
-  VERSION = "0.1.1"
+  VERSION = "0.1.2"
 
   # This function reads the chars on image by OCR
   #
