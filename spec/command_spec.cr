@@ -29,7 +29,7 @@ describe Tesseract::Ocr::Command do
       ],
     })
 
-    command.command.should eq("tesseract ./spec/resources/blank.tif stdout -l eng -c a=1 -c b=2 /tmp/config_path.txt")
+    command.command.should eq("tesseract ./spec/resources/blank.tif stdout -l eng -c debug_file=/dev/null -c a=1 -c b=2 /tmp/config_path.txt")
   end
 
   it "join all options to a command" do
@@ -44,6 +44,6 @@ describe Tesseract::Ocr::Command do
     command.add_config("c=3")
     command.add_config("d=4")
 
-    command.command.should eq("tesseract ./spec/resources/blank.tif stdout -c a=1 -c b=2 -c c=3 -c d=4")
+    command.command.should eq("tesseract ./spec/resources/blank.tif stdout -c debug_file=/dev/null -c a=1 -c b=2 -c c=3 -c d=4")
   end
 end
