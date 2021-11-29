@@ -46,4 +46,9 @@ describe Tesseract::Ocr::Command do
 
     command.command.should eq("tesseract ./spec/resources/blank.tif stdout -c debug_file=/dev/null -c a=1 -c b=2 -c c=3 -c d=4")
   end
+
+  it "handles spaces in files" do
+    command = Tesseract::Ocr::Command.new("./spec/resources/test copy.png", "stdout")
+    command.command.should eq("tesseract './spec/resources/test copy.png' stdout -c debug_file=/dev/null")
+  end
 end
