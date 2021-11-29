@@ -34,7 +34,7 @@ class Tesseract::Ocr::Command
     (
       [
         "#{@options[:command]? || "tesseract"}",
-        @source,
+        Process.quote(@source),
         @output,
         make_short_option(:l, @options[:l]? || @options[:lang]?),
         make_option(:oem, @options[:oem]?),
