@@ -4,8 +4,8 @@ describe Tesseract::Ocr do
   it "read a image" do
     Tesseract::Ocr.read("./spec/resources/blank.tif").should eq("")
     Tesseract::Ocr.read("./spec/resources/test.tif").should eq("43XF")
-    Tesseract::Ocr.read("./spec/resources/test.png").should eq("HW9W")
-    Tesseract::Ocr.read("./spec/resources/test copy.png").should eq("HW9W")
+    Tesseract::Ocr.read("./spec/resources/test.png", {:oem => 0}).should eq("HW9W")
+    Tesseract::Ocr.read("./spec/resources/test copy.png", {:oem => 0}).should eq("HW9W")
     Tesseract::Ocr.read("./spec/resources/world.png", {:lang => "eng", :psm => 7, :oem => 1}).should eq("world")
     Tesseract::Ocr.read("./spec/resources/world.png", {:lang => "eng"}).should eq("world")
     Tesseract::Ocr.read("./spec/resources/world.png", {:oem => 3}).should eq("world")
